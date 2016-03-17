@@ -4,16 +4,22 @@ import java.net.URL;
 
 public class ScoredURL implements Comparable<ScoredURL> {
   private URL url;
-  private double score;
+  private int score;
   
-  public ScoredURL(URL url, double score) {
+  public ScoredURL(URL url, int score) {
     this.url = url;
     this.score = score;
   }
   
   @Override
   public int compareTo(ScoredURL o) {
-    return score < o.score ? -1 : score > o.score ? 1 : 0;
+    return score - o.score;
+  }
+  
+  @Override
+  public String toString() {
+    return url.toString() + ". Score = " + score;
+    
   }
   
   public URL getURL() {
