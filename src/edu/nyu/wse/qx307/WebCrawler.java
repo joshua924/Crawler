@@ -149,6 +149,8 @@ public class WebCrawler {
     for (String word : words) {
       if (word.startsWith(">")) {
         word = word.substring(1);
+      } else if (word.length() > 1 && word.endsWith("<")) {
+        word = word.substring(0, word.length() - 1);
       }
       if (word.matches("[A-Za-z0-9.]*") && !word.equals("href")) {
         res.add(word);
@@ -174,6 +176,11 @@ public class WebCrawler {
         score += 40;
         fourPointSet.add(query);
       }
+    }
+
+    // if any of the conditions above is met, just return
+    if (score != 0) {
+      return score;
     }
 
     // remove html tags
